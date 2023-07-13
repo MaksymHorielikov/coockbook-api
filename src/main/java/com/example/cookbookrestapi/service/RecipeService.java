@@ -14,4 +14,6 @@ public interface RecipeService {
     void deleteById(Long id);
 
     List<Recipe> findVersionsById(Long id);
+
+    Long getCountRecipes();
 }

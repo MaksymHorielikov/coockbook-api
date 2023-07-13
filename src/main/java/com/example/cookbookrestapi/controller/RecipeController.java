@@ -3,6 +3,7 @@ package com.example.cookbookrestapi.controller;
 import com.example.cookbookrestapi.dto.mapper.DtoMapper;
 import com.example.cookbookrestapi.dto.request.RecipeRequestDto;
 import com.example.cookbookrestapi.dto.response.RecipeResponseDto;
+import com.example.cookbookrestapi.dto.response.ResponseCountDto;
 import com.example.cookbookrestapi.model.Recipe;
 import com.example.cookbookrestapi.service.RecipeService;
 import jakarta.validation.Valid;
@@ -28,6 +29,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class RecipeController {
     private final DtoMapper<Recipe, RecipeRequestDto, RecipeResponseDto> recipeMapper;
     private final RecipeService recipeService;
+
+    @GetMapping("/count")
+    public ResponseCountDto getCountRecipes() {
+        ResponseCountDto responseCountDto = new ResponseCountDto();
+        responseCountDto.setCount(recipeService.getCountRecipes());
+        return responseCountDto;
+    }
 
     @GetMapping
     public List<RecipeResponseDto> getAllRecipes(
