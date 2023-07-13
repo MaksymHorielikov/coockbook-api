@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     List<Recipe> getAllBy(Pageable pageable);
+
     @Query(value = "SELECT COUNT(deleted) FROM recipes WHERE deleted = 0", nativeQuery = true)
     Long getCountRecipes();
 }
