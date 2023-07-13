@@ -56,7 +56,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<Recipe> findVersionsById(Long id) {
         List<Recipe> versions = new ArrayList<>();
-        Recipe currentRecipe = findById(id);
+        Recipe currentRecipe = findById(id).getParent();
         while (currentRecipe != null) {
             versions.add(currentRecipe);
             currentRecipe = currentRecipe.getParent();
@@ -64,5 +64,10 @@ public class RecipeServiceImpl implements RecipeService {
         return versions.stream()
                 .sorted(Comparator.comparing(Recipe::getDescription))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Long getCountRecipes() {
+        return recipeRepository.getCountRecipes();
     }
 }
